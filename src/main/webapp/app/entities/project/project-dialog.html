@@ -1,0 +1,68 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myProjectLabel">Create or edit a Project</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.project.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.project.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.project.name"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_accoutManager">Accout Manager</label>
+            <input type="text" class="form-control" name="accoutManager" id="field_accoutManager"
+                    ng-model="vm.project.accoutManager"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_presalesArchitect">Presales Architect</label>
+            <input type="text" class="form-control" name="presalesArchitect" id="field_presalesArchitect"
+                    ng-model="vm.project.presalesArchitect"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_defaultProjectMargin">Default Project Margin</label>
+            <input type="number" class="form-control" name="defaultProjectMargin" id="field_defaultProjectMargin"
+                    ng-model="vm.project.defaultProjectMargin"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_subcontractProjectMargin">Subcontract Project Margin</label>
+            <input type="number" class="form-control" name="subcontractProjectMargin" id="field_subcontractProjectMargin"
+                    ng-model="vm.project.subcontractProjectMargin"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_pmpercentage">Pmpercentage</label>
+            <input type="number" class="form-control" name="pmpercentage" id="field_pmpercentage"
+                    ng-model="vm.project.pmpercentage"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_risk">Risk</label>
+            <input type="number" class="form-control" name="risk" id="field_risk"
+                    ng-model="vm.project.risk"
+                    />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

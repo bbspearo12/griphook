@@ -1,0 +1,63 @@
+entity Project {
+	name String,
+    accoutManager String,
+    presalesArchitect String,
+    defaultProjectMargin Float,
+    subcontractProjectMargin Float, 
+    pmpercentage Float,
+    risk Float
+}
+
+entity GW_SKU_COST {
+	sku GW_SKU,
+    cost	Float
+}
+
+entity Task {
+	name String,
+	estimatedHours Float,
+	resource GW_SKU,
+	cost Float, //auto populated from GW_SKU_COST
+	numberOfResources Integer,
+	subTotal Float
+}
+
+entity Phase {
+	name String,
+	subTotal Float, // auto calculated from list of tasks
+	subTotalWithMargin Float // auto calculated from tasks + default project margin
+}
+
+relationship OneToMany {
+	Phase{task} to Task,
+	Project{phase} to Phase
+}
+
+enum GW_SKU {
+  GW_PS_NET_ENG3_SR_ARCHITECT,
+  GW_PS_NET_ENG2_ARCHITECT,
+  GW_PS_NET_ENG1_ENGINEER,
+  GW_PS_STORAGE_ENG3_SR_ARCHITECT,
+  GW_PS_STORAGE_ENG2_ARCHITECT,
+  GW_PS_STORAGE_ENG1_ENGINEER,
+  GW_PS_VIRT_ENG3_SR_ARCHITECT,
+  GW_PS_VIRT_ENG2_ARCHITECT,
+  GW_PS_VIRT_ENG1_ENGINEER,
+  GW_PS_MS_ENG3_SR_ARCHITECT,
+  GW_PS_MS_ENG2_ARCHITECT,
+  GW_PS_MS_ENG1_ENGINEER,
+  GW_PS_SEC_ENG3_SR_ARCHITECT,
+  GW_PS_SEC_ENG2_ARCHITECT,
+  GW_PS_SEC_ENG1_ENGINEER,
+  GW_PS_CLD_ENG3_SR_ARCHITECT,
+  GW_PS_CLD_ENG2_ARCHITECT,
+  GW_PS_CLD_ENG1_ENGINEER,
+  GW_PS_INT_LEVEL3,
+  GW_PS_INT_LEVEL2,
+  GW_PS_INT_LEVEL1,
+  GW_PS_PM_LEVEL2_PROJECT_MANAGER,
+  GW_PS_PM_LEVEL1_PROJECT_MANAGER,
+  GW_PS_PC_PROJECT_COORDINATOR
+}
+
+paginate Project with pagination

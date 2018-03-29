@@ -1,0 +1,58 @@
+<div>
+    <h2>GW SKU COSTS</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="gw-sku-cost.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new GW SKU COST
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr>
+                    <th><span>ID</span></th>
+                    <th><span>Sku</span></th>
+                    <th><span>Cost</span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="gW_SKU_COST in vm.gW_SKU_COSTS track by gW_SKU_COST.id">
+                    <td><a ui-sref="gw-sku-cost-detail({id:gW_SKU_COST.id})">{{gW_SKU_COST.id}}</a></td>
+                    <td>{{gW_SKU_COST.sku}}</td>
+                    <td>{{gW_SKU_COST.cost}}</td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="gw-sku-cost-detail({id:gW_SKU_COST.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="gw-sku-cost.edit({id:gW_SKU_COST.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="gw-sku-cost.delete({id:gW_SKU_COST.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

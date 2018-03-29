@@ -1,0 +1,47 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "phase",
+            "otherEntityName": "phase",
+            "otherEntityRelationshipName": "project"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "accoutManager",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "presalesArchitect",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "defaultProjectMargin",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "subcontractProjectMargin",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "pmpercentage",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "risk",
+            "fieldType": "Float"
+        }
+    ],
+    "changelogDate": "20180319041844",
+    "entityTableName": "project",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "no",
+    "jpaMetamodelFiltering": false
+}

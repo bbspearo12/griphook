@@ -1,0 +1,91 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myTaskLabel">Create or edit a Task</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.task.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.task.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                    ng-model="vm.task.name"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_estimatedHours">Estimated Hours</label>
+            <input type="number" class="form-control" name="estimatedHours" id="field_estimatedHours"
+                    ng-model="vm.task.estimatedHours" ng-change="updatehours(vm.task.estimatedHours)"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_resource">Resource</label>
+            <select class="form-control" name="resource" ng-model="vm.task.resource" id="field_resource">
+                <option value="GW_PS_NET_ENG3_SR_ARCHITECT">GW_PS_NET_ENG3_SR_ARCHITECT</option>
+                <option value="GW_PS_NET_ENG2_ARCHITECT">GW_PS_NET_ENG2_ARCHITECT</option>
+                <option value="GW_PS_NET_ENG1_ENGINEER">GW_PS_NET_ENG1_ENGINEER</option>
+                <option value="GW_PS_STORAGE_ENG3_SR_ARCHITECT">GW_PS_STORAGE_ENG3_SR_ARCHITECT</option>
+                <option value="GW_PS_STORAGE_ENG2_ARCHITECT">GW_PS_STORAGE_ENG2_ARCHITECT</option>
+                <option value="GW_PS_STORAGE_ENG1_ENGINEER">GW_PS_STORAGE_ENG1_ENGINEER</option>
+                <option value="GW_PS_VIRT_ENG3_SR_ARCHITECT">GW_PS_VIRT_ENG3_SR_ARCHITECT</option>
+                <option value="GW_PS_VIRT_ENG2_ARCHITECT">GW_PS_VIRT_ENG2_ARCHITECT</option>
+                <option value="GW_PS_VIRT_ENG1_ENGINEER">GW_PS_VIRT_ENG1_ENGINEER</option>
+                <option value="GW_PS_MS_ENG3_SR_ARCHITECT">GW_PS_MS_ENG3_SR_ARCHITECT</option>
+                <option value="GW_PS_MS_ENG2_ARCHITECT">GW_PS_MS_ENG2_ARCHITECT</option>
+                <option value="GW_PS_MS_ENG1_ENGINEER">GW_PS_MS_ENG1_ENGINEER</option>
+                <option value="GW_PS_SEC_ENG3_SR_ARCHITECT">GW_PS_SEC_ENG3_SR_ARCHITECT</option>
+                <option value="GW_PS_SEC_ENG2_ARCHITECT">GW_PS_SEC_ENG2_ARCHITECT</option>
+                <option value="GW_PS_SEC_ENG1_ENGINEER">GW_PS_SEC_ENG1_ENGINEER</option>
+                <option value="GW_PS_CLD_ENG3_SR_ARCHITECT">GW_PS_CLD_ENG3_SR_ARCHITECT</option>
+                <option value="GW_PS_CLD_ENG2_ARCHITECT">GW_PS_CLD_ENG2_ARCHITECT</option>
+                <option value="GW_PS_CLD_ENG1_ENGINEER">GW_PS_CLD_ENG1_ENGINEER</option>
+                <option value="GW_PS_INT_LEVEL3">GW_PS_INT_LEVEL3</option>
+                <option value="GW_PS_INT_LEVEL2">GW_PS_INT_LEVEL2</option>
+                <option value="GW_PS_INT_LEVEL1">GW_PS_INT_LEVEL1</option>
+                <option value="GW_PS_PM_LEVEL2_PROJECT_MANAGER">GW_PS_PM_LEVEL2_PROJECT_MANAGER</option>
+                <option value="GW_PS_PM_LEVEL1_PROJECT_MANAGER">GW_PS_PM_LEVEL1_PROJECT_MANAGER</option>
+                <option value="GW_PS_PC_PROJECT_COORDINATOR">GW_PS_PC_PROJECT_COORDINATOR</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_cost">Cost</label>
+            <input type="number" class="form-control" name="cost" id="field_cost"
+                    ng-model="vm.task.cost" ng-change="updateCost(vm.task.cost)"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_numberOfResources">Number Of Resources</label>
+            <input type="number" class="form-control" name="numberOfResources" id="field_numberOfResources"
+                    ng-model="vm.task.numberOfResources" ng-change="updatenresources(vm.task.numberOfResources)"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_subTotal">Sub Total</label>
+            <input type="number" class="form-control" name="subTotal" id="field_subTotal"
+                    ng-model="vm.task.subTotal"
+                    />
+        </div>
+
+        <div class="form-group">
+            <label for="field_phase">Phase</label>
+            <select class="form-control" id="field_phase" name="phase" ng-model="vm.task.phase" ng-options="phase as phase.name for phase in vm.phases track by phase.id">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>
