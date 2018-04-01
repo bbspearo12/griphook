@@ -67,5 +67,8 @@
   },
   "scripts": {
     "test": "gulp test"
+  },
+  "dependencies": {
+    "angular-dynamic-locale": "^0.1.35"
   }
 }
