@@ -5,9 +5,9 @@
         .module('augustusApp')
         .controller('ProjectDetailController', ProjectDetailController);
 
-    ProjectDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Project', 'Phase', 'Task'];
+    ProjectDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Project', 'Phase', 'Task', '$http'];
 
-    function ProjectDetailController($scope, $rootScope, $stateParams, previousState, entity, Project, Phase, Task) {
+    function ProjectDetailController($scope, $rootScope, $stateParams, previousState, entity, Project, Phase, Task, $http) {
         var vm = this;
 
         vm.project = entity;
@@ -92,7 +92,29 @@
             console.log("phase pst: "+pst);
             return pst;
         }
-
+        $scope.exp = function(id) {
+            console.log("getting project report for "+id);
+            var url = '/api/projects/'+id+'/report';
+            $http.get(url).success(function(data, status, headers, config) {
+                //console.log(data);
+                var contentDispositionHeader = headers('Content-Disposition');
+                var result = contentDispositionHeader.split(';')[1].trim().split('=')[1];
+                var filename = result.replace(/"/g, '');
+                console.log(filename+data);
+                var csvfile = document.createElement('a');
+                csvfile.href = 'data:attachment/csv;charset=utf-8,' + encodeURI(data);
+                csvfile.target = '_blank';
+                csvfile.download = filename;
+                csvfile.click();
+                $scope.returned_data=JSON.stringify(data);
+                return JSON.stringify(data);
+            }).error(function(err, status) {
+                console.log(err);
+                console.log(status);
+                $scope.returned_data='Failed to export to csv, Error from server: '+JSON.stringify(err);
+                return JSON.stringify(err);
+            });
+        };
         var unsubscribe = $rootScope.$on('augustusApp:projectUpdate', function(event, result) {
             vm.project = result;
         });

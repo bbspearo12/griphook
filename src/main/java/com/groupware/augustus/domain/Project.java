@@ -43,7 +43,7 @@ public class Project implements Serializable {
     @Column(name = "risk")
     private Float risk;
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "project")
     @JsonIgnore
     private Set<Phase> phases = new HashSet<>();
 

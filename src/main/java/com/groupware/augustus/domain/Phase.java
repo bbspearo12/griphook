@@ -34,7 +34,7 @@ public class Phase implements Serializable {
     @ManyToOne
     private Project project;
 
-    @OneToMany(mappedBy = "phase")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "phase")
     @JsonIgnore
     private Set<Task> tasks = new HashSet<>();
 
