@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .factory('Project', Project);
 
     Project.$inject = ['$resource'];

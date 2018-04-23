@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .controller('GW_SKU_COSTDeleteController',GW_SKU_COSTDeleteController);
 
     GW_SKU_COSTDeleteController.$inject = ['$uibModalInstance', 'entity', 'GW_SKU_COST'];

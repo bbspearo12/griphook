@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .controller('TaskController', TaskController);
 
     TaskController.$inject = ['Task'];

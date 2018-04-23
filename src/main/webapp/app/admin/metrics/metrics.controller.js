@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .controller('JhiMetricsMonitoringController', JhiMetricsMonitoringController);
 
     JhiMetricsMonitoringController.$inject = ['$scope','JhiMetricsService', '$uibModal'];

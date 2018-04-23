@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .controller('PhaseDialogController', PhaseDialogController);
 
     PhaseDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'Phase', 'Project', 'Task'];
@@ -34,7 +34,7 @@
         }
 
         function onSaveSuccess (result) {
-            $scope.$emit('augustusApp:phaseUpdate', result);
+            $scope.$emit('griphookApp:phaseUpdate', result);
             $uibModalInstance.close(result);
             vm.isSaving = false;
         }

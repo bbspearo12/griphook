@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .factory('authExpiredInterceptor', authExpiredInterceptor);
 
     authExpiredInterceptor.$inject = ['$rootScope', '$q', '$injector'];

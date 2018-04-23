@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .controller('ProjectController', ProjectController);
 
     ProjectController.$inject = ['$state', 'Project', 'ParseLinks', 'AlertService', 'paginationConstants', 'pagingParams'];

@@ -1,7 +1,7 @@
 (function() {
     'use strict';
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .factory('GW_SKU_COST', GW_SKU_COST);
 
     GW_SKU_COST.$inject = ['$resource'];

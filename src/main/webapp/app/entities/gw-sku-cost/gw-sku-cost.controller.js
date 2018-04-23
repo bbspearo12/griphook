@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .controller('GW_SKU_COSTController', GW_SKU_COSTController);
 
     GW_SKU_COSTController.$inject = ['GW_SKU_COST'];

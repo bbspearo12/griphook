@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .factory('LoginService', LoginService);
 
     LoginService.$inject = ['$uibModal'];

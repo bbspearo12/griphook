@@ -16,12 +16,12 @@
 
 spring:
     application:
-        name: augustus
+        name: griphook
     jackson:
         serialization.write_dates_as_timestamps: false
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:h2:mem:augustus;DB_CLOSE_DELAY=-1
+        url: jdbc:h2:mem:griphook;DB_CLOSE_DELAY=-1
         name:
         username:
         password:

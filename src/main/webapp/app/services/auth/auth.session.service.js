@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .factory('AuthServerProvider', AuthServerProvider);
 
     AuthServerProvider.$inject = ['$http', '$localStorage' ];
@@ -43,7 +43,7 @@
 
         function logout () {
 
-            
+
             // logout from the server
             $http.post('api/logout').success(function (response) {
                 delete $localStorage.authenticationToken;
@@ -51,7 +51,7 @@
                 $http.get('api/account');
                 return response;
             });
-            
+
         }
     }
 })();

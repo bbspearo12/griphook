@@ -14,7 +14,7 @@ describe('Controller Tests', function() {
             MockPreviousState = jasmine.createSpy('MockPreviousState');
             MockProject = jasmine.createSpy('MockProject');
             MockPhase = jasmine.createSpy('MockPhase');
-            
+
 
             var locals = {
                 '$scope': $scope,
@@ -32,7 +32,7 @@ describe('Controller Tests', function() {
 
         describe('Root Scope Listening', function() {
             it('Unregisters root scope listener upon scope destruction', function() {
-                var eventType = 'augustusApp:projectUpdate';
+                var eventType = 'griphookApp:projectUpdate';
 
                 createController();
                 expect($rootScope.$$listenerCount[eventType]).toEqual(1);

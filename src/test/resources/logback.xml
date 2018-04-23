@@ -3,7 +3,7 @@
 <configuration scan="true">
     <include resource="org/springframework/boot/logging/logback/base.xml"/>
 
-    <logger name="com.groupware.augustus" level="INFO"/>
+    <logger name="com.groupware.griphook" level="INFO"/>
 
     <logger name="io.github.jhipster" level="WARN"/>
 

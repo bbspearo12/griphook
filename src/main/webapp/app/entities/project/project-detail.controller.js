@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .controller('ProjectDetailController', ProjectDetailController);
 
     ProjectDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Project', 'Phase', 'Task', '$http'];
@@ -115,7 +115,7 @@
                 return JSON.stringify(err);
             });
         };
-        var unsubscribe = $rootScope.$on('augustusApp:projectUpdate', function(event, result) {
+        var unsubscribe = $rootScope.$on('griphookApp:projectUpdate', function(event, result) {
             vm.project = result;
         });
         $scope.$on('$destroy', unsubscribe);

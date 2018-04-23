@@ -1,7 +1,7 @@
 {
-  "name": "augustus",
+  "name": "griphook",
   "version": "0.0.0",
-  "description": "Description for augustus",
+  "description": "Description for griphook",
   "private": true,
   "license": "UNLICENSED",
   "cacheDirectories": [

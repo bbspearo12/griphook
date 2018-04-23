@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .factory('Activate', Activate);
 
     Activate.$inject = ['$resource'];

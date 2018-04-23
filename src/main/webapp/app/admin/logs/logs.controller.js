@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .controller('LogsController', LogsController);
 
     LogsController.$inject = ['LogsService'];

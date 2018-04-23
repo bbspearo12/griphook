@@ -11,7 +11,7 @@
     };
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .component('jhiAlertError', jhiAlertError);
 
     jhiAlertErrorController.$inject = ['$scope', 'AlertService', '$rootScope'];
@@ -36,7 +36,7 @@
             );
         }
 
-        var cleanHttpErrorListener = $rootScope.$on('augustusApp.httpError', function (event, httpResponse) {
+        var cleanHttpErrorListener = $rootScope.$on('griphookApp.httpError', function (event, httpResponse) {
             var i;
             event.stopPropagation();
             switch (httpResponse.status) {

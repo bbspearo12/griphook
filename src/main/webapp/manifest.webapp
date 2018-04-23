@@ -1,6 +1,6 @@
 {
-  "name": "augustusApp",
-  "short_name": "augustusApp",
+  "name": "griphookApp",
+  "short_name": "griphookApp",
   "icons": [
       {
           "src": "/content/images/logo-jhipster.png",

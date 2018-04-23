@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .controller('TaskDeleteController',TaskDeleteController);
 
     TaskDeleteController.$inject = ['$uibModalInstance', 'entity', 'Task'];

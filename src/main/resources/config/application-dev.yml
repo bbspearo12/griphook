@@ -16,7 +16,7 @@
 logging:
     level:
         ROOT: DEBUG
-        com.groupware.augustus: DEBUG
+        com.groupware.griphook: DEBUG
         io.github.jhipster: DEBUG
 
 spring:
@@ -32,7 +32,7 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:mysql://localhost:3306/augustus?useUnicode=true&characterEncoding=utf8&useSSL=false
+        url: jdbc:mysql://localhost:3306/griphook?useUnicode=true&characterEncoding=utf8&useSSL=false
         username: cmutgi
         password: gringotts
         hikari:
@@ -65,7 +65,7 @@ liquibase:
 
 # ===================================================================
 # To enable SSL, generate a certificate using:
-# keytool -genkey -alias augustus -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+# keytool -genkey -alias griphook -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
 #
 # You can also use Let's Encrypt:
 # https://maximilian-boehm.com/hp2121/Create-a-Java-Keystore-JKS-from-Let-s-Encrypt-Certificates.htm
@@ -78,7 +78,7 @@ liquibase:
 #        key-store: keystore.p12
 #        key-store-password: <your-password>
 #        key-store-type: PKCS12
-#        key-alias: augustus
+#        key-alias: griphook
 # ===================================================================
 server:
     port: 8082
@@ -105,7 +105,7 @@ jhipster:
             # security key (this key should be unique for your application, and kept secret)
             key: 08a57f185cae797be0786913aa599b6e8829c105
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: augustus@localhost
+        from: griphook@localhost
         base-url: http://127.0.0.1:8080
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx.enabled: true
@@ -113,7 +113,7 @@ jhipster:
             enabled: false
             host: localhost
             port: 2003
-            prefix: augustus
+            prefix: griphook
         prometheus: # Use the "prometheus" Maven profile to have the Prometheus dependencies
             enabled: false
             endpoint: /prometheusMetrics

@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .controller('GW_SKU_COSTDialogController', GW_SKU_COSTDialogController);
 
     GW_SKU_COSTDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'entity', 'GW_SKU_COST'];
@@ -32,7 +32,7 @@
         }
 
         function onSaveSuccess (result) {
-            $scope.$emit('augustusApp:gW_SKU_COSTUpdate', result);
+            $scope.$emit('griphookApp:gW_SKU_COSTUpdate', result);
             $uibModalInstance.close(result);
             vm.isSaving = false;
         }

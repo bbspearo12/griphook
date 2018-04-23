@@ -1,7 +1,7 @@
 (function() {
     'use strict';
 
-    angular.module('augustusApp')
+    angular.module('griphookApp')
         .controller('HealthModalController', HealthModalController);
 
     HealthModalController.$inject = ['$uibModalInstance', 'currentHealth', 'baseName', 'subSystemName'];

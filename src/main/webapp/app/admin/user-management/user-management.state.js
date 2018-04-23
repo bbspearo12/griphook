@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .config(stateConfig);
 
     stateConfig.$inject = ['$stateProvider'];
@@ -100,7 +100,7 @@
             url: '/{login}',
             data: {
                 authorities: ['ROLE_ADMIN'],
-                pageTitle: 'augustus'
+                pageTitle: 'griphook'
             },
             views: {
                 'content@': {

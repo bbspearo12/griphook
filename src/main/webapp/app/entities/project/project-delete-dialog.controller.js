@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .controller('ProjectDeleteController',ProjectDeleteController);
 
     ProjectDeleteController.$inject = ['$uibModalInstance', 'entity', 'Project'];

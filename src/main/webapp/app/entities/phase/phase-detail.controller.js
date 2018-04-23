@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .controller('PhaseDetailController', PhaseDetailController);
 
     PhaseDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'entity', 'Phase', 'Project', 'Task'];
@@ -13,7 +13,7 @@
         vm.phase = entity;
         vm.previousState = previousState.name;
 
-        var unsubscribe = $rootScope.$on('augustusApp:phaseUpdate', function(event, result) {
+        var unsubscribe = $rootScope.$on('griphookApp:phaseUpdate', function(event, result) {
             vm.phase = result;
         });
         $scope.$on('$destroy', unsubscribe);

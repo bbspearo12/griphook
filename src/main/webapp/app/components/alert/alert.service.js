@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .provider('AlertService', AlertService);
 
     function AlertService () {

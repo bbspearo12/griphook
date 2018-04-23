@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .controller('PhaseDeleteController',PhaseDeleteController);
 
     PhaseDeleteController.$inject = ['$uibModalInstance', 'entity', 'Phase'];

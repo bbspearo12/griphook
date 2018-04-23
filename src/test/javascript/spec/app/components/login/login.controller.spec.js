@@ -2,7 +2,7 @@
 
 describe('Controller Tests', function () {
 
-    beforeEach(module('augustusApp'));
+    beforeEach(module('griphookApp'));
 
     describe('LoginController', function () {
         var $scope, authService;

@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .directive('jhSortBy', jhSortBy);
 
     function jhSortBy() {

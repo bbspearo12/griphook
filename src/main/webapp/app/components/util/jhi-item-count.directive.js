@@ -15,6 +15,6 @@
     };
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .component('jhiItemCount', jhiItemCount);
 })();

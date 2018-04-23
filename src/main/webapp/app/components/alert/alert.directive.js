@@ -11,7 +11,7 @@
     };
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .component('jhiAlert', jhiAlert);
 
     jhiAlertController.$inject = ['$scope', 'AlertService'];

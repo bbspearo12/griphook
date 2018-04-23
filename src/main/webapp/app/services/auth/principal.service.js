@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('augustusApp')
+        .module('griphookApp')
         .factory('Principal', Principal);
 
     Principal.$inject = ['$q', 'Account'];

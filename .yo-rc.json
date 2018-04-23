@@ -1,12 +1,12 @@
 {
   "generator-jhipster": {
     "promptValues": {
-      "packageName": "com.groupware.augustus"
+      "packageName": "com.groupware.griphook"
     },
     "jhipsterVersion": "4.13.3",
-    "baseName": "augustus",
-    "packageName": "com.groupware.augustus",
-    "packageFolder": "com/groupware/augustus",
+    "baseName": "griphook",
+    "packageName": "com.groupware.griphook",
+    "packageFolder": "com/groupware/griphook",
     "serverPort": "8080",
     "authenticationType": "session",
     "cacheProvider": "no",
