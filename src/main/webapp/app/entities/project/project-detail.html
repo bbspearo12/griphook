@@ -67,7 +67,7 @@
             </tr>
             </thead>
             <tbody >
-                <td class="table-responsive"><span>{{phase.name}}</span></td>
+            <td class="table-responsive"><span><a ui-sref="phase-detail({id:phase.id})">{{phase.name}}</a></span></td>
                 <td class="table-responsive"><span>{{phase.subTotal}}</span></td>
                 <td class="table-responsive"><span>{{phase.subTotal + (phase.subTotal*vm.project.defaultProjectMargin/100) | number:0}}</span></td>
                 <td class="table-responsive"><span>{{phase.phaseEstHours}}</span></td>
@@ -81,7 +81,7 @@
                         <th scope="col"><span>Subtotal</span></th>
                     </tr>
                     <tr ng-repeat="task in phase.tasks">
-                        <td><span>{{task.name}}</span></td>
+                        <td><span><a ui-sref="task-detail({id:task.id})">{{task.name}}</a></span></td>
                         <td><span>{{task.estimatedHours}}</span></td>
                         <td><span>{{task.resource}}</span></td>
                         <td><span>{{task.cost}}</span></td>
