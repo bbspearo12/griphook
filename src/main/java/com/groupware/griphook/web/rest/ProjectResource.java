@@ -35,6 +35,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Optional;
 
+class TOTALS {
+    Float PM_TOTAL = 0.0f;
+    Float PS_TOTAL = 0.0f;
+}
+
 /**
  * REST controller for managing Project.
  */
@@ -142,9 +147,7 @@ public class ProjectResource {
         JSONArray ja = new JSONArray();
 
         Iterator<Phase> phases = project.getPhases().iterator();
-        Float PS_TOTAL = 0.0f;
-        Float PM_TOTAL = 0.0f;
-        Float TOTAL = 0.0f;
+        TOTALS totals = new TOTALS();
         int i=0;
         while (phases.hasNext()) {
             Phase p = phases.next();
@@ -153,7 +156,7 @@ public class ProjectResource {
                 ja.put(i, formattedjo);
                 i++;
                 for (Task t: p.getTasks()) {
-                    JSONObject taskjo = getCSVFormattedTaskJSONObject(t, PS_TOTAL, PM_TOTAL);
+                    JSONObject taskjo = getCSVFormattedTaskJSONObject(t, totals);
                     ja.put(i, taskjo);
                     i++;
                 }
@@ -164,50 +167,73 @@ public class ProjectResource {
 
         }
 
+        // Add newlines before adding totals
+        for(int j=0; j<10; j++) {
+            JSONObject newline = getCSVFormattedNewlineJSONObject();
+            ja.put(i, newline);
+            i++;
+        }
+
         // Add PS Totals
-        JSONObject psjo = getCSVFormattedPSTotals(PS_TOTAL);
+        JSONObject psheaderjo = getCSVFormattedPSHeaders();
+        ja.put(i, psheaderjo);
+        i++;
+
+        JSONObject psjo = getCSVFormattedPSTotals(totals.PS_TOTAL);
         ja.put(i, psjo);
         i++;
 
         // Add PM Totals
-        JSONObject pmjo = getCSVFormattedPMTotals(PM_TOTAL);
+        JSONObject pmjo = getCSVFormattedPMTotals(totals.PM_TOTAL);
         ja.put(i, pmjo);
         i++;
 
-        log.debug("Returning json array of assets: {}", ja);
+        //log.debug("Returning json array of assets: {}", ja);
         String csv = CDL.toString(ja);
+        log.debug("Returning csv: {}", csv);
+
         if (csv != null) {
             response.getOutputStream().write(csv.getBytes(Charset.forName("UTF-8")));
-        } else {
-            ResponseUtil.wrapOrNotFound(Optional.ofNullable(phases));
         }
-//        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(project));
+            ResponseUtil.wrapOrNotFound(Optional.ofNullable(phases));
+    }
+
+    private static JSONObject getCSVFormattedPSHeaders() throws JSONException {
+        LinkedHashMap<String, String> lhmh = new LinkedHashMap<String, String>();
+        lhmh.put("Phase", "");
+        lhmh.put("Tasks", "COST");
+        lhmh.put("Estimated Hours", "Margin");
+        lhmh.put("Resource Skill Level", "Subtotal");
+        lhmh.put("COST (Auto populated)", "Risk Markup");
+        lhmh.put("Number of Resources", "Total Sell");
+        JSONObject  jo = new JSONObject(lhmh);
+        return jo;
     }
 
     private static JSONObject getCSVFormattedPSTotals(Float PS_Total) throws JSONException {
         LinkedHashMap<String, String> lhm = new LinkedHashMap<String, String>();
-        lhm.put("", "GW_PS");
-        lhm.put("COST", "$"+String.valueOf(PS_Total));
-        lhm.put("Margin", "40%");
+        lhm.put("Phase", "GW_PS");
+        lhm.put("Tasks", "$"+String.valueOf(PS_Total));
+        lhm.put("Estimated Hours", "40%");
         Float st = PS_Total + PS_Total *40/100;
-        lhm.put("Subtotal", String.valueOf(st));
-        lhm.put("Risk Markup", "3%");
+        lhm.put("Resource Skill Level", String.valueOf(st));
+        lhm.put("COST (Auto populated)", "3%");
         st = st + st*3/100;
-        lhm.put("Total Sell", String.valueOf(st));
+        lhm.put("Number of Resources", String.valueOf(st));
         JSONObject  jo = new JSONObject(lhm);
         return jo;
     }
 
     private static JSONObject getCSVFormattedPMTotals(Float PM_TOTAL) throws JSONException {
         LinkedHashMap<String, String> lhm = new LinkedHashMap<String, String>();
-        lhm.put("", "PM");
-        lhm.put("COST", "$"+String.valueOf(PM_TOTAL));
-        lhm.put("Margin", "40%");
+        lhm.put("Phase", "PM");
+        lhm.put("Tasks", "$"+String.valueOf(PM_TOTAL));
+        lhm.put("Estimated Hours", "40%");
         Float st = PM_TOTAL + PM_TOTAL *40/100;
-        lhm.put("Subtotal", String.valueOf(st));
-        lhm.put("Risk Markup", "3%");
+        lhm.put("Resource Skill Level", String.valueOf(st));
+        lhm.put("COST (Auto populated)", "3%");
         st = st + st*3/100;
-        lhm.put("Total Sell", String.valueOf(st));
+        lhm.put("Number of Resources", String.valueOf(st));
         JSONObject  jo = new JSONObject(lhm);
         return jo;
     }
@@ -276,7 +302,7 @@ public class ProjectResource {
         return String.valueOf(st);
     }
 
-    public static JSONObject getCSVFormattedTaskJSONObject(Task t, Float PS_TOTAL, Float PM_TOTAL) throws JSONException {
+    public static JSONObject getCSVFormattedTaskJSONObject(Task t, TOTALS totals) throws JSONException {
         LinkedHashMap<String, String> lhm = new LinkedHashMap<String, String>();
         lhm.put("Phase", "");
         lhm.put("Tasks", t.getName());
@@ -287,13 +313,26 @@ public class ProjectResource {
         lhm.put("Task Subtotal (COST)","");
         lhm.put("Task Total (w/Margin)", "");
 
-        if (t.getResource() != null &&  t.getResource().toString().contains("PS")) {
-            PS_TOTAL += t.getCost();
-        }
         if (t.getResource() != null &&  t.getResource().toString().contains("PM")) {
-            PM_TOTAL += t.getCost();
+            totals.PM_TOTAL += t.getCost()*t.getEstimatedHours();
+        }  else  /*(t.getResource() != null &&  t.getResource().toString().contains("PS")) */ {
+            totals.PS_TOTAL += t.getCost()*t.getEstimatedHours();
         }
 
         return new JSONObject(lhm);
+    }
+
+    public static JSONObject getCSVFormattedNewlineJSONObject() throws JSONException {
+        LinkedHashMap<String, String> lhm = new LinkedHashMap<String, String>();
+        lhm.put("Phase", "");
+        lhm.put("Tasks", "");
+        lhm.put("Estimated Hours", "");
+        lhm.put("Resource Skill Level",  "");
+        lhm.put("COST (Auto populated)", "");
+        lhm.put("Number of Resources",  "");
+        lhm.put("Task Subtotal (COST)","");
+        lhm.put("Task Total (w/Margin)", "");
+        JSONObject  jo = new JSONObject(lhm);
+        return jo;
     }
 }

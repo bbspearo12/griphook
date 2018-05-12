@@ -100,7 +100,7 @@
                 var contentDispositionHeader = headers('Content-Disposition');
                 var result = contentDispositionHeader.split(';')[1].trim().split('=')[1];
                 var filename = result.replace(/"/g, '');
-                console.log(filename+data);
+                //console.log(data);
                 var csvfile = document.createElement('a');
                 csvfile.href = 'data:attachment/csv;charset=utf-8,' + encodeURI(data);
                 csvfile.target = '_blank';
