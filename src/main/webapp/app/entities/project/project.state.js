@@ -133,6 +133,34 @@
                 });
             }]
         })
+        .state('project.new.embedded', {
+                    parent: 'project',
+                    url: '/newem',
+                    data: {
+                        authorities: ['ROLE_USER']
+                    },
+                    views: {
+                        'content@': {
+                            templateUrl: 'app/entities/project/project-create.html',
+                            controller: 'ProjectCreateController',
+                            controllerAs: 'vm'
+                        }
+                    },
+                    resolve: {
+                        entity: function () {
+                            return {
+                                name: null,
+                                accoutManager: null,
+                                presalesArchitect: null,
+                                defaultProjectMargin: null,
+                                subcontractProjectMargin: null,
+                                pmpercentage: null,
+                                risk: null,
+                                id: null
+                            };
+                        }
+                    }
+                })
         .state('project.edit', {
             parent: 'project',
             url: '/{id}/edit',

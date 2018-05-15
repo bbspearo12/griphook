@@ -1,0 +1,134 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()">
+    <h4 id="myProjectLabel">Create Project</h4>
+            <jhi-alert-error></jhi-alert-error>
+    <div class="row">
+            <div class="col-xs-6 form-group" >
+                <label class="control-label" for="field_name">Name</label>
+                <input type="text" class="form-control" name="name" id="field_name"
+                       ng-model="vm.project.name" required
+                />
+            </div>
+            <div class="col-xs-6 form-group">
+                <label class="control-label" for="field_accoutManager">Accout Manager</label>
+                <input type="text" class="form-control" name="accoutManager" id="field_accoutManager"
+                       ng-model="vm.project.accoutManager" required
+                />
+            </div>
+            <div class="col-xs-6 form-group">
+                <label class="control-label" for="field_presalesArchitect">Presales Architect</label>
+                <input type="text" class="form-control" name="presalesArchitect" id="field_presalesArchitect"
+                       ng-model="vm.project.presalesArchitect" required
+                />
+            </div>
+            <div class="col-xs-6 form-group">
+                <label class="control-label" for="field_defaultProjectMargin">Default Project Margin</label>
+                <input type="number" class="form-control" name="defaultProjectMargin" id="field_defaultProjectMargin"
+                       ng-model="vm.project.defaultProjectMargin"
+                />
+            </div>
+    </div>
+    <div class="row">
+
+            <div class="col-xs-6 form-group">
+                <label class="control-label" for="field_subcontractProjectMargin">Subcontract Project Margin</label>
+                <input type="number" class="form-control" name="subcontractProjectMargin" id="field_subcontractProjectMargin"
+                       ng-model="vm.project.subcontractProjectMargin"
+                />
+            </div>
+            <div class="col-xs-6 form-group">
+                <label class="control-label" for="field_pmpercentage">Pmpercentage</label>
+                <input type="number" class="form-control" name="pmpercentage" id="field_pmpercentage"
+                       ng-model="vm.project.pmpercentage"
+                />
+            </div>
+            <div class="col-xs-6 form-group">
+                <label class="control-label" for="field_risk">Risk</label>
+                <input type="number" class="form-control" name="risk" id="field_risk"
+                       ng-model="vm.project.risk"
+                />
+            </div>
+    </div>
+            <div class="form-group">
+                <label class="control-label">Phases</label>
+                <fieldset class="field_set" ng-repeat="phase in phases">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">{{phase.name}}</h3>
+                        </div>
+                        <div class="panel-body">
+                            <fieldset class="field_set" ng-repeat="task in phase.Tasks">
+                                <div class="col-xs-2 form-group">
+                                    <label class="control-label" for="field_name">Name</label>
+                                    <input type="text" class="form-control" name="" id="field_task_name"/>
+                                </div>
+                                <div class="col-xs-2 form-group">
+                                    <label class="control-label" for="field_estimatedHours">Estimated Hours</label>
+                                    <input type="number" class="form-control" name="estimatedHours" id="field_estimatedHours"
+                                           ng-change="updatehours(vm.task.estimatedHours)"
+                                    />
+                                </div>
+                                <div class="col-xs-2 form-group">
+                                    <label class="control-label" for="field_resource">Resource</label>
+                                    <select class="form-control" name="resource" id="field_resource">
+                                        <option value="GW_PS_NET_ENG3_SR_ARCHITECT">GW_PS_NET_ENG3_SR_ARCHITECT</option>
+                                        <option value="GW_PS_NET_ENG2_ARCHITECT">GW_PS_NET_ENG2_ARCHITECT</option>
+                                        <option value="GW_PS_NET_ENG1_ENGINEER">GW_PS_NET_ENG1_ENGINEER</option>
+                                        <option value="GW_PS_STORAGE_ENG3_SR_ARCHITECT">GW_PS_STORAGE_ENG3_SR_ARCHITECT</option>
+                                        <option value="GW_PS_STORAGE_ENG2_ARCHITECT">GW_PS_STORAGE_ENG2_ARCHITECT</option>
+                                        <option value="GW_PS_STORAGE_ENG1_ENGINEER">GW_PS_STORAGE_ENG1_ENGINEER</option>
+                                        <option value="GW_PS_VIRT_ENG3_SR_ARCHITECT">GW_PS_VIRT_ENG3_SR_ARCHITECT</option>
+                                        <option value="GW_PS_VIRT_ENG2_ARCHITECT">GW_PS_VIRT_ENG2_ARCHITECT</option>
+                                        <option value="GW_PS_VIRT_ENG1_ENGINEER">GW_PS_VIRT_ENG1_ENGINEER</option>
+                                        <option value="GW_PS_MS_ENG3_SR_ARCHITECT">GW_PS_MS_ENG3_SR_ARCHITECT</option>
+                                        <option value="GW_PS_MS_ENG2_ARCHITECT">GW_PS_MS_ENG2_ARCHITECT</option>
+                                        <option value="GW_PS_MS_ENG1_ENGINEER">GW_PS_MS_ENG1_ENGINEER</option>
+                                        <option value="GW_PS_SEC_ENG3_SR_ARCHITECT">GW_PS_SEC_ENG3_SR_ARCHITECT</option>
+                                        <option value="GW_PS_SEC_ENG2_ARCHITECT">GW_PS_SEC_ENG2_ARCHITECT</option>
+                                        <option value="GW_PS_SEC_ENG1_ENGINEER">GW_PS_SEC_ENG1_ENGINEER</option>
+                                        <option value="GW_PS_CLD_ENG3_SR_ARCHITECT">GW_PS_CLD_ENG3_SR_ARCHITECT</option>
+                                        <option value="GW_PS_CLD_ENG2_ARCHITECT">GW_PS_CLD_ENG2_ARCHITECT</option>
+                                        <option value="GW_PS_CLD_ENG1_ENGINEER">GW_PS_CLD_ENG1_ENGINEER</option>
+                                        <option value="GW_PS_INT_LEVEL3">GW_PS_INT_LEVEL3</option>
+                                        <option value="GW_PS_INT_LEVEL2">GW_PS_INT_LEVEL2</option>
+                                        <option value="GW_PS_INT_LEVEL1">GW_PS_INT_LEVEL1</option>
+                                        <option value="GW_PS_PM_LEVEL2_PROJECT_MANAGER">GW_PS_PM_LEVEL2_PROJECT_MANAGER</option>
+                                        <option value="GW_PS_PM_LEVEL1_PROJECT_MANAGER">GW_PS_PM_LEVEL1_PROJECT_MANAGER</option>
+                                        <option value="GW_PS_PC_PROJECT_COORDINATOR">GW_PS_PC_PROJECT_COORDINATOR</option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-2 form-group">
+                                    <label class="control-label" for="field_cost">Cost</label>
+                                    <input type="number" class="form-control" name="cost" id="field_cost"
+                                            ng-change="updateCost(vm.task.cost)"
+                                    />
+                                </div>
+                                <div class="col-xs-2 form-group">
+                                    <label class="control-label" for="field_numberOfResources">No Of Resources</label>
+                                    <input type="number" class="form-control" name="numberOfResources" id="field_numberOfResources"
+                                            ng-change="updatenresources(vm.task.numberOfResources)"/>
+                                </div>
+                                <div class="col-xs-2 form-group">
+                                    <label class="control-label" for="field_subTotal">Sub Total</label>
+                                    <input type="number" class="form-control" name="subTotal" id="field_subTotal"/>
+                                </div>
+                            </fieldset>
+                            <div id="tasksDisplay">
+                                {{ phase.Tasks }}
+                            </div>
+                            <button type="button" class="btn btn-primary btn-sm" ng-click="addTask(phase.id)">Add Task</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -19,19 +19,6 @@
                     ng-model="vm.phase.name"
                     />
         </div>
-        <!--<div class="form-group">-->
-            <!--<label class="control-label" for="field_subTotal">Sub Total</label>-->
-            <!--<input type="number" class="form-control" name="subTotal" id="field_subTotal"-->
-                    <!--ng-model="vm.phase.subTotal"-->
-                    <!--/>-->
-        <!--</div>-->
-        <!--<div class="form-group">-->
-            <!--<label class="control-label" for="field_subTotalWithMargin">Sub Total With Margin</label>-->
-            <!--<input type="number" class="form-control" name="subTotalWithMargin" id="field_subTotalWithMargin"-->
-                    <!--ng-model="vm.phase.subTotalWithMargin"-->
-                    <!--/>-->
-        <!--</div>-->
-
         <div class="form-group">
             <label for="field_project">Project</label>
             <select class="form-control" id="field_project" name="project" ng-model="vm.phase.project" ng-options="project as project.name for project in vm.projects track by project.id">
