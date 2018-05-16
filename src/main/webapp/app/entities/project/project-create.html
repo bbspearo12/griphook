@@ -59,18 +59,16 @@
                         <div class="panel-body">
                             <fieldset class="field_set" ng-repeat="task in phase.Tasks">
                                 <div class="col-xs-2 form-group">
-                                    <label class="control-label" for="field_name">Name</label>
-                                    <input type="text" class="form-control" name="" id="field_task_name"/>
+                                    <label class="control-label" for="field_task_name">Name</label>
+                                    <input type="text" class="form-control" name="tname" id="field_task_name" ng-model="task.tname"/>
                                 </div>
                                 <div class="col-xs-2 form-group">
                                     <label class="control-label" for="field_estimatedHours">Estimated Hours</label>
-                                    <input type="number" class="form-control" name="estimatedHours" id="field_estimatedHours"
-                                           ng-change="updatehours(vm.task.estimatedHours)"
-                                    />
+                                    <input type="number" class="form-control" name="estimatedHours" id="field_estimatedHours" ng-model="task.ehours"/>
                                 </div>
                                 <div class="col-xs-2 form-group">
                                     <label class="control-label" for="field_resource">Resource</label>
-                                    <select class="form-control" name="resource" id="field_resource">
+                                    <select class="form-control" name="resource" id="field_resource" ng-model="task.resource" ng-change="task.cost = updateCost(task.resource)">
                                         <option value="GW_PS_NET_ENG3_SR_ARCHITECT">GW_PS_NET_ENG3_SR_ARCHITECT</option>
                                         <option value="GW_PS_NET_ENG2_ARCHITECT">GW_PS_NET_ENG2_ARCHITECT</option>
                                         <option value="GW_PS_NET_ENG1_ENGINEER">GW_PS_NET_ENG1_ENGINEER</option>
@@ -99,24 +97,21 @@
                                 </div>
                                 <div class="col-xs-2 form-group">
                                     <label class="control-label" for="field_cost">Cost</label>
-                                    <input type="number" class="form-control" name="cost" id="field_cost"
-                                            ng-change="updateCost(vm.task.cost)"
-                                    />
+                                    <input type="number" class="form-control" name="cost" id="field_cost" ng-model="task.cost"/>
                                 </div>
                                 <div class="col-xs-2 form-group">
                                     <label class="control-label" for="field_numberOfResources">No Of Resources</label>
-                                    <input type="number" class="form-control" name="numberOfResources" id="field_numberOfResources"
-                                            ng-change="updatenresources(vm.task.numberOfResources)"/>
+                                    <input type="number" class="form-control" name="numberOfResources" id="field_numberOfResources" ng-model="task.nofr"/>
                                 </div>
                                 <div class="col-xs-2 form-group">
-                                    <label class="control-label" for="field_subTotal">Sub Total</label>
-                                    <input type="number" class="form-control" name="subTotal" id="field_subTotal"/>
+                                    <!--<label class="control-label" for="field_subTotal">SubTotal</label>-->
+                                    <!--<input type="number" class="form-control" name="subTotal" id="field_subTotal"/>-->
+                                    <button type="button" class="glyphicon glyphicon-plus btn-small" ng-click="addTask(phase.id, tname, ehours, tcost, resource, nofr)"></button>
                                 </div>
                             </fieldset>
                             <div id="tasksDisplay">
                                 {{ phase.Tasks }}
                             </div>
-                            <button type="button" class="btn btn-primary btn-sm" ng-click="addTask(phase.id)">Add Task</button>
                         </div>
                     </div>
                 </fieldset>
