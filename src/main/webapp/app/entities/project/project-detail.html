@@ -54,9 +54,9 @@
 
 
 
-    <h4><span>Phases</span></h4>
+    <h4 align="center"><span>Phases</span></h4>
     <div class="table-responsive">
-        <table class="table table-bordered table-striped" ng-repeat="phase in vm.viewData track by phase.id">
+        <table class="table table-bordered table-striped">
             <thead>
             <tr>
                 <th class="table-responsive"><span>Name</span></th>
@@ -66,13 +66,16 @@
 
             </tr>
             </thead>
-            <tbody >
-            <td class="table-responsive"><span><a ui-sref="phase-detail({id:phase.id})">{{phase.name}}</a></span></td>
-                <td class="table-responsive"><span>{{phase.subTotal}}</span></td>
-                <td class="table-responsive"><span>{{phase.subTotal + (phase.subTotal*vm.project.defaultProjectMargin/100) | number:0}}</span></td>
-                <td class="table-responsive"><span>{{phase.phaseEstHours}}</span></td>
+        </table>
+        <table class="table table-bordered table-striped" ng-repeat="phase in vm.viewData track by phase.id">
 
-                <tr>
+            <tbody >
+                <td  width="25%" class="table-responsive"><a ui-sref="phase-detail({id:phase.id})">Phase: {{phase.name}}</a></td>
+                <td  width="25%" class="table-responsive"><span>{{phase.subTotal}}</span></td>
+                <td  width="25%" class="table-responsive"><span>{{phase.subTotal + (phase.subTotal*vm.project.defaultProjectMargin/100) | number:0}}</span></td>
+                <td  width="25%" class="table-responsive"><span>{{phase.phaseEstHours}}</span></td>
+
+                    <tr ng-show="phase.tasks.length">
                         <th scope="col"><span class="border">Task Name</span></th>
                         <th scope="col"><span>Estimated Hours</span></th>
                         <th scope="col"><span>Resource</span></th>
@@ -80,7 +83,7 @@
                         <th scope="col"><span>Number of Resources</span></th>
                         <th scope="col"><span>Subtotal</span></th>
                     </tr>
-                    <tr ng-repeat="task in phase.tasks">
+                    <tr ng-show="phase.tasks.length" ng-repeat="task in phase.tasks">
                         <td><span><a ui-sref="task-detail({id:task.id})">{{task.name}}</a></span></td>
                         <td><span>{{task.estimatedHours}}</span></td>
                         <td><span>{{task.resource}}</span></td>
