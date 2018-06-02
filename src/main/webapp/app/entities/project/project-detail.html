@@ -43,10 +43,10 @@
                 </tr>
                 </thead>
                 <tbody>
-                <td><h4><span class="label label-success">{{vm.engTotal |number:0}}</span></h4></td>
-                <td><h4><span class="label label-info" >{{vm.pmTotal | number:0}}</span></h4></td>
-                <td><h4><span class="label label-info">{{vm.engTotal + vm.pmTotal + ((vm.engTotal + vm.pmTotal)*vm.project.defaultProjectMargin/100) | number:0 }}</span></h4></td>
-                <td><h4><span class="label label-primary" >{{vm.engTotal + vm.pmTotal + ((vm.engTotal + vm.pmTotal)*vm.project.defaultProjectMargin/100) + ((vm.engTotal + vm.pmTotal)*vm.project.risk/100) | number:0}}</span></h4></td>
+                <td><h4><span class="label label-success">{{vm.engTotal}}</span></h4></td>
+                <td><h4><span class="label label-info" >{{vm.pmTotal}}</span></h4></td>
+                <td><h4><span class="label label-info">{{vm.engTotal + vm.pmTotal + ((vm.engTotal + vm.pmTotal)*vm.project.defaultProjectMargin/100)}}</span></h4></td>
+                <td><h4><span class="label label-primary" >{{vm.engTotal + vm.pmTotal + ((vm.engTotal + vm.pmTotal)*(vm.project.defaultProjectMargin+vm.project.risk)/100)}}</span></h4></td>
                 </tbody>
             </table>
         </div>
@@ -85,7 +85,7 @@
                 <td width="10%" class="table-responsive"></td>
                 <td width="10%" class="table-responsive"></td>
                 <td width="10%" class="table-responsive">{{phase.subTotal}}</td>
-                <td width="10%" class="table-responsive">{{phase.subTotal + (phase.subTotal*vm.project.defaultProjectMargin/100) | number:0}}</td>
+                <td width="10%" class="table-responsive">{{phase.subTotal + (phase.subTotal*vm.project.defaultProjectMargin/100) }}</td>
                 <td width="10%" class="table-responsive">{{phase.phaseEstHours}}</td>
 
 

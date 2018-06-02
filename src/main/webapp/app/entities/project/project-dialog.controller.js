@@ -14,11 +14,11 @@
         vm.clear = clear;
         vm.save = save;
         vm.phases = Phase.query();
-        vm.project.defaultProjectMargin = 40;
-        vm.project.defaultProjectMargin = 40;
-        vm.project.subcontractProjectMargin = 20;
-        vm.project.pmpercentage = 20;
-        vm.project.risk = 3;
+//        vm.project.defaultProjectMargin = 40;
+//        vm.project.defaultProjectMargin = 40;
+//        vm.project.subcontractProjectMargin = 20;
+//        vm.project.pmpercentage = 20;
+//        vm.project.risk = 3;
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();
