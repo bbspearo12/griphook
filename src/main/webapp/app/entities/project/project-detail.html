@@ -59,10 +59,17 @@
         <table class="table table-bordered table-striped">
             <thead>
             <tr>
-                <th class="table-responsive"><span>Name</span></th>
-                <th class="table-responsive"><span>Phase Total</span></th>
-                <th class="table-responsive"><span>Phase Total w/Margin</span></th>
-                <th class="table-responsive"><span>Total Phase Hours</span></th>
+                <th width="10%" class="table-responsive">Name</th>
+                <th width="10%" class="table-responsive">Task Name</th>
+                <th width="5%" class="table-responsive">Estimated Hours</th>
+                <th width="20%" class="table-responsive">Resource</th>
+                <th width="5%" class="table-responsive">Cost</th>
+                <th width="10%" class="table-responsive">Number of Resources</th>
+                <th width="10%" class="table-responsive">Task Subtotal</th>
+                <th width="10%" class="table-responsive">Phase Total</th>
+                <th width="10%" class="table-responsive">Phase Total w/Margin</th>
+                <th width="10%" class="table-responsive">Total Phase Hours</th>
+
 
             </tr>
             </thead>
@@ -70,26 +77,32 @@
         <table class="table table-bordered table-striped" ng-repeat="phase in vm.viewData track by phase.id">
 
             <tbody >
-                <td  width="25%" class="table-responsive"><a ui-sref="phase-detail({id:phase.id})">Phase: {{phase.name}}</a></td>
-                <td  width="25%" class="table-responsive"><span>{{phase.subTotal}}</span></td>
-                <td  width="25%" class="table-responsive"><span>{{phase.subTotal + (phase.subTotal*vm.project.defaultProjectMargin/100) | number:0}}</span></td>
-                <td  width="25%" class="table-responsive"><span>{{phase.phaseEstHours}}</span></td>
+                <td width="10%" class="table-responsive"><a ui-sref="phase-detail({id:phase.id})">{{phase.name}}</a></td>
+                <td width="10%" class="table-responsive"></td>
+                <td width="5%" class="table-responsive"></td>
+                <td width="20%" class="table-responsive"></td>
+                <td width="5%" class="table-responsive"></td>
+                <td width="10%" class="table-responsive"></td>
+                <td width="10%" class="table-responsive"></td>
+                <td width="10%" class="table-responsive">{{phase.subTotal}}</td>
+                <td width="10%" class="table-responsive">{{phase.subTotal + (phase.subTotal*vm.project.defaultProjectMargin/100) | number:0}}</td>
+                <td width="10%" class="table-responsive">{{phase.phaseEstHours}}</td>
 
-                    <tr ng-show="phase.tasks.length">
-                        <th scope="col"><span class="border">Task Name</span></th>
-                        <th scope="col"><span>Estimated Hours</span></th>
-                        <th scope="col"><span>Resource</span></th>
-                        <th scope="col"><span>Cost</span></th>
-                        <th scope="col"><span>Number of Resources</span></th>
-                        <th scope="col"><span>Subtotal</span></th>
+
+                <tr ng-show="phase.tasks.length">
+
                     </tr>
                     <tr ng-show="phase.tasks.length" ng-repeat="task in phase.tasks">
-                        <td><span><a ui-sref="task-detail({id:task.id})">{{task.name}}</a></span></td>
-                        <td><span>{{task.estimatedHours}}</span></td>
-                        <td><span>{{task.resource}}</span></td>
-                        <td><span>{{task.cost}}</span></td>
-                        <td><span>{{task.numberOfResources}}</span></td>
-                        <td><span>{{task.subTotal}}</span></td>
+                        <td width="10%" class="table-responsive"></td>
+                        <td width="10%" class="table-responsive"><a ui-sref="task-detail({id:task.id})">{{task.name}}</a></td>
+                        <td width="5%" class="table-responsive">{{task.estimatedHours}}</td>
+                        <td width="20%" class="table-responsive">{{task.resource}}</td>
+                        <td width="5%" class="table-responsive">{{task.cost}}</td>
+                        <td width="10%" class="table-responsive">{{task.numberOfResources}}</td>
+                        <td width="10%" class="table-responsive">{{task.subTotal}}</td>
+                        <td width="10%" class="table-responsive"></td>
+                        <td width="10%" class="table-responsive"></td>
+                        <td width="10%" class="table-responsive"></td>
                     </tr>
             </tbody>
         </table>
