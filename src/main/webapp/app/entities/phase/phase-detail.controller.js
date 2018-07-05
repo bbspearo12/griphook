@@ -17,5 +17,9 @@
             vm.phase = result;
         });
         $scope.$on('$destroy', unsubscribe);
+
+        function doTheBack() {
+          window.history.back();
+        };
     }
 })();

@@ -74,11 +74,27 @@
         </div>
 
         <div class="form-group">
-            <label for="field_phase">Phase</label>
-            <select class="form-control" id="field_phase" name="phase" ng-model="vm.task.phase" ng-options="phase as phase.name for phase in vm.phases track by phase.id">
+            <label for="field_project">Project</label>
+            <select class="form-control" id="field_project" name="project" ng-model="vm.project" ng-options="project as project.name for project in vm.projects track by project.id"
+                    ng-change="updatePhases(vm.project)">
                 <option value=""></option>
             </select>
         </div>
+
+        <!--<div class="form-group">-->
+            <!--<label for="field_phase">Phase</label>-->
+            <!--<select class="form-control" id="field_phase" name="phase" ng-model="vm.task.phase" ng-options="phase as phase.name + vm.delimiter + phase.project.name for phase in vm.phases track by phase.id">-->
+                <!--<option value=""></option>-->
+            <!--</select>-->
+        <!--</div>-->
+
+        <div class="form-group">
+            <label for="field_phase">Phase</label>
+            <select class="form-control" id="field_phase" name="phase" ng-model="vm.task.phase" ng-options="phase as phase.name for phase in vm.updatedPhases track by phase.id">
+                <option value=""></option>
+            </select>
+        </div>
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
