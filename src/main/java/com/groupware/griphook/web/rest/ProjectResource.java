@@ -5,6 +5,8 @@ import com.google.common.base.Strings;
 import com.groupware.griphook.domain.Phase;
 import com.groupware.griphook.domain.Task;
 import com.groupware.griphook.domain.Project;
+import com.groupware.griphook.repository.PhaseRepository;
+import com.groupware.griphook.repository.TaskRepository;
 import org.apache.commons.lang3.StringUtils;
 import com.groupware.griphook.repository.ProjectRepository;
 import com.groupware.griphook.web.rest.errors.BadRequestAlertException;
@@ -30,10 +32,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import java.nio.charset.Charset;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 class TOTALS {
     Float PM_TOTAL = 0.0f;
@@ -52,9 +51,14 @@ public class ProjectResource {
     private static final String ENTITY_NAME = "project";
 
     private final ProjectRepository projectRepository;
+    private final PhaseRepository phaseRepository;
+    private final TaskRepository taskRepository;
 
-    public ProjectResource(ProjectRepository projectRepository) {
+
+    public ProjectResource(ProjectRepository projectRepository, PhaseRepository phaseRepository, TaskRepository taskRepository) {
         this.projectRepository = projectRepository;
+        this.phaseRepository = phaseRepository;
+        this.taskRepository = taskRepository;
     }
 
     /**
@@ -97,6 +101,66 @@ public class ProjectResource {
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, project.getId().toString()))
             .body(result);
+    }
+
+    /**
+     * POST  /projects/{id}/clone/{name} : Clone a Project and its associated phases and tasks
+     *
+     * @param project the project to clone
+     * @return the ResponseEntity with status 201 (Created) and with body the new project, or with status 400 (Bad Request) if the project has already an ID
+     * @throws URISyntaxException if the Location URI syntax is incorrect
+     */
+    @PostMapping("/projects/{id}/clone/{name}")
+    @Timed
+    public ResponseEntity<Project> cloneProject(@PathVariable Long id, @PathVariable String name) throws URISyntaxException {
+        log.debug("REST request to clone Project : {}", id);
+        Project project = projectRepository.findOne(id);
+        if (project ==  null) {
+            return ResponseUtil.wrapOrNotFound(Optional.ofNullable(project));
+        }
+        project.setName(name);
+        project.setId(null);
+        Project result = projectRepository.save(project);
+        List<Phase> filteredPhases = getProjectPhases(id);
+        for (Phase p : filteredPhases) {
+           Long phaseid = p.getId();
+           List<Task> phaseTasks = getPhaseTasks(phaseid);
+           p.setProject(result);
+           p.setId(null);
+           Phase phaseResult = phaseRepository.save(p);
+
+           for (Task t : phaseTasks) {
+               t.setPhase(phaseResult);
+               t.setId(null);
+               taskRepository.save(t);
+           }
+        }
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, project.getId().toString()))
+            .body(result);
+    }
+
+
+    private List<Phase> getProjectPhases(Long id)  {
+        List<Phase> phases = phaseRepository.findAll();
+        List<Phase> filteredPhases = new ArrayList<Phase>();
+        for (Phase p: phases) {
+            if (p.getProject().getId() == id) {
+                filteredPhases.add(p);
+            }
+        }
+        return filteredPhases;
+    }
+
+    private List<Task> getPhaseTasks(Long id)  {
+        List<Task> tasks = taskRepository.findAll();
+        List<Task> filteredTasks = new ArrayList<Task>();
+        for (Task t: tasks) {
+            if (t.getPhase().getId() == id) {
+                filteredTasks.add(t);
+            }
+        }
+        return filteredTasks;
     }
 
     /**

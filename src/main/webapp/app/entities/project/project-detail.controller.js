@@ -21,7 +21,7 @@
         vm.TotalHours = 0;
 
         function getTasksByPhaseId (id) {
-            console.log("getting tasks for phase id  "+id)
+            //console.log("getting tasks for phase id  "+id)
             return vm.phaseTaskMap[id];
         }
 
@@ -30,16 +30,16 @@
             Phase.query(function(result) {
                 if (result != null ) {
                     result.forEach(function(element) {
-                        console.log("processing phase "+element);
+                        //console.log("processing phase "+element);
                         if (element.project.id == vm.project.id) {
-                            console.log("adding phase "+element.id);
+                            //console.log("adding phase "+element.id);
                             var phasetasks = vm.phaseTaskMap[element.id];
-                            console.log("tasks: "+ phasetasks)
+                            //console.log("tasks: "+ phasetasks)
                             var phaseHours = getPhaseHours(phasetasks);
                             var pst = getPhaseSubtotal(phasetasks);
                             vm.viewData.push({'id': element.id, 'name': element.name, 'subTotal': pst, 'subTotalWithMargin': element.subTotalWithMargin, 'phaseEstHours': phaseHours, 'tasks': vm.phaseTaskMap[element.id]});
                             vm.phases.push(element);
-                            console.log("jsondata: "+JSON.stringify(vm.viewData));
+                            //console.log("jsondata: "+JSON.stringify(vm.viewData));
                         }
                     })
                 }
@@ -55,14 +55,14 @@
                         if (!vm.phaseTaskMap[element.phase.id]) {
                             vm.phaseTaskMap[element.phase.id] = [];
                         }
-                         console.log("adding task for phase "+element.phase.id);
+                         //console.log("adding task for phase "+element.phase.id);
 
-                        console.log("adding task "+element);
+                        //console.log("adding task "+element);
                         vm.phaseTaskMap[element.phase.id].push(element);
                     })
                 }
             });
-            console.log("phase task map "+vm.phaseTaskMap)
+            //console.log("phase task map "+vm.phaseTaskMap)
         }
 
 
@@ -75,7 +75,7 @@
             angular.forEach(tasks, function (task) {
                 hours = hours + task.estimatedHours;
             })
-            console.log("phase hours: "+hours);
+            //console.log("phase hours: "+hours);
             return hours;
         }
 
@@ -89,7 +89,7 @@
                     vm.pmTotal = vm.pmTotal + task.subTotal;
                 }
             })
-            console.log("phase pst: "+pst);
+            //console.log("phase pst: "+pst);
             return pst;
         }
         $scope.exp = function(id) {
@@ -109,8 +109,8 @@
                 $scope.returned_data=JSON.stringify(data);
                 return JSON.stringify(data);
             }).error(function(err, status) {
-                console.log(err);
-                console.log(status);
+                //console.log(err);
+                //console.log(status);
                 $scope.returned_data='Failed to export to csv, Error from server: '+JSON.stringify(err);
                 return JSON.stringify(err);
             });

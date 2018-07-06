@@ -3,7 +3,9 @@ package com.groupware.griphook.web.rest;
 import com.groupware.griphook.GriphookApp;
 
 import com.groupware.griphook.domain.Project;
+import com.groupware.griphook.repository.PhaseRepository;
 import com.groupware.griphook.repository.ProjectRepository;
+import com.groupware.griphook.repository.TaskRepository;
 import com.groupware.griphook.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -63,6 +65,12 @@ public class ProjectResourceIntTest {
     private ProjectRepository projectRepository;
 
     @Autowired
+    private PhaseRepository phaseRepository;
+
+    @Autowired
+    private TaskRepository taskRepository;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -81,7 +89,7 @@ public class ProjectResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ProjectResource projectResource = new ProjectResource(projectRepository);
+        final ProjectResource projectResource = new ProjectResource(projectRepository, phaseRepository, taskRepository);
         this.restProjectMockMvc = MockMvcBuilders.standaloneSetup(projectResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

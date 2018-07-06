@@ -161,6 +161,31 @@
                         }
                     }
                 })
+        .state('project.clone', {
+                parent: 'project',
+                url: '/{id}/clone',
+                data: {
+                    authorities: ['ROLE_USER']
+                },
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        templateUrl: 'app/entities/project/project-clone-dialog.html',
+                        controller: 'ProjectCloneController',
+                        controllerAs: 'vm',
+                        backdrop: 'static',
+                        size: 'lg',
+                        resolve: {
+                            entity: ['Project', function(Project) {
+                                return Project.get({id : $stateParams.id}).$promise;
+                            }]
+                        }
+                    }).result.then(function() {
+                        $state.go('project', null, { reload: 'project' });
+                    }, function() {
+                        $state.go('^');
+                    });
+                }]
+            })
         .state('project.edit', {
             parent: 'project',
             url: '/{id}/edit',
