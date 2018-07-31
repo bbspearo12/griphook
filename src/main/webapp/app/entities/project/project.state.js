@@ -134,58 +134,58 @@
             }]
         })
         .state('project.new.embedded', {
-                    parent: 'project',
-                    url: '/newem',
-                    data: {
-                        authorities: ['ROLE_USER']
-                    },
-                    views: {
-                        'content@': {
-                            templateUrl: 'app/entities/project/project-create.html',
-                            controller: 'ProjectCreateController',
-                            controllerAs: 'vm'
-                        }
-                    },
-                    resolve: {
-                        entity: function () {
-                            return {
-                                name: null,
-                                accoutManager: null,
-                                presalesArchitect: null,
-                                defaultProjectMargin: null,
-                                subcontractProjectMargin: null,
-                                pmpercentage: null,
-                                risk: null,
-                                id: null
-                            };
-                        }
-                    }
-                })
+            parent: 'project',
+            url: '/newem',
+            data: {
+                authorities: ['ROLE_USER']
+            },
+            views: {
+                'content@': {
+                    templateUrl: 'app/entities/project/project-create.html',
+                    controller: 'ProjectCreateController',
+                    controllerAs: 'vm'
+                }
+            },
+            resolve: {
+                entity: function () {
+                    return {
+                        name: null,
+                        accoutManager: null,
+                        presalesArchitect: null,
+                        defaultProjectMargin: null,
+                        subcontractProjectMargin: null,
+                        pmpercentage: null,
+                        risk: null,
+                        id: null
+                    };
+                }
+            }
+        })
         .state('project.clone', {
-                parent: 'project',
-                url: '/{id}/clone',
-                data: {
-                    authorities: ['ROLE_USER']
-                },
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                    $uibModal.open({
-                        templateUrl: 'app/entities/project/project-clone-dialog.html',
-                        controller: 'ProjectCloneController',
-                        controllerAs: 'vm',
-                        backdrop: 'static',
-                        size: 'lg',
-                        resolve: {
-                            entity: ['Project', function(Project) {
-                                return Project.get({id : $stateParams.id}).$promise;
-                            }]
-                        }
-                    }).result.then(function() {
-                        $state.go('project', null, { reload: 'project' });
-                    }, function() {
-                        $state.go('^');
-                    });
-                }]
-            })
+            parent: 'project',
+            url: '/{id}/clone',
+            data: {
+                authorities: ['ROLE_USER']
+            },
+            onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                $uibModal.open({
+                    templateUrl: 'app/entities/project/project-clone-dialog.html',
+                    controller: 'ProjectCloneController',
+                    controllerAs: 'vm',
+                    backdrop: 'static',
+                    size: 'lg',
+                    resolve: {
+                        entity: ['Project', function(Project) {
+                            return Project.get({id : $stateParams.id}).$promise;
+                        }]
+                    }
+                }).result.then(function() {
+                    $state.go('project', null, { reload: 'project' });
+                }, function() {
+                    $state.go('^');
+                });
+            }]
+        })
         .state('project.edit', {
             parent: 'project',
             url: '/{id}/edit',

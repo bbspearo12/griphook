@@ -12,7 +12,7 @@ module.exports = function() {
         notify.onError({
             title:    "JHipster Gulp Build",
             subtitle: "Failure!",
-            message:  "Error: <%= error.message %>",
+            message:  "Error: <%= error %>",
             sound:    "Beep"
         }).apply(this, args);
     }

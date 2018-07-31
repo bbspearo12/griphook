@@ -30,6 +30,15 @@
     ],
     "jhiPrefix": "jhi",
     "enableTranslation": false,
-    "enableHibernateCache": false
+    "enableHibernateCache": false,
+    "aws": {
+      "applicationName": "griphook",
+      "environmentName": "griphook-qa",
+      "bucketName": "griphookqa",
+      "instanceType": "t2.micro",
+      "awsRegion": "eu-west-1",
+      "dbName": "griphook",
+      "dbInstanceClass": "db.t2.micro"
+    }
   }
 }

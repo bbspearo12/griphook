@@ -50,6 +50,6 @@
         $scope.addNewPhase = function () {
             var newPhase = $scope.newPhases.length+1;
             $scope.newPhases.push({name: ''});
-        }
+        };
     }
 })();

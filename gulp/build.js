@@ -10,12 +10,13 @@ var fs = require('fs'),
     ngAnnotate = require('gulp-ng-annotate'),
     prefix = require('gulp-autoprefixer'),
     cssnano = require('gulp-cssnano'),
-    uglify = require('gulp-uglify'),
+    uglify = require('gulp-uglify-es').default,
     useref = require("gulp-useref"),
     revReplace = require("gulp-rev-replace"),
     plumber = require('gulp-plumber'),
     gulpIf = require('gulp-if'),
-    handleErrors = require('./handle-errors');
+    handleErrors = require('./handle-errors'),
+    gutil = require('gulp-util');
 
 var config = require('./config');
 
@@ -42,6 +43,7 @@ module.exports = function() {
         //append html templates
         .pipe(gulpIf('**/app.js', footer(templates)))
         .pipe(gulpIf('*.js', jsTask()))
+        .on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()); })
         .pipe(gulpIf('*.css', cssTask()))
         .pipe(gulpIf('*.html', htmlmin({collapseWhitespace: true})))
         .pipe(gulpIf('**/*.!(html)', rev()))

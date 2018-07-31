@@ -19,7 +19,7 @@
         $scope.$on('$destroy', unsubscribe);
 
         function doTheBack() {
-          window.history.back();
-        };
+            window.history.back();
+        }
     }
 })();
