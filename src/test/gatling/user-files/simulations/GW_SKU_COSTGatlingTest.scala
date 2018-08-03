@@ -72,7 +72,7 @@ class GW_SKU_COSTGatlingTest extends Simulation {
             .exec(http("Create new gW_SKU_COST")
             .post("/api/gw-sku-costs")
             .headers(headers_http_authenticated)
-            .body(StringBody("""{"id":null, "sku":null, "cost":null}""")).asJSON
+            .body(StringBody("""{"id":null, "sku":null, "skill":null, "cost":null}""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_gW_SKU_COST_url"))).exitHereIfFailed
             .pause(10)

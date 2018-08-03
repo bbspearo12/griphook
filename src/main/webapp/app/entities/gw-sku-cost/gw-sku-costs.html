@@ -20,6 +20,7 @@
                 <tr>
                     <th><span>ID</span></th>
                     <th><span>Sku</span></th>
+                    <th><span>Skill</span></th>
                     <th><span>Cost</span></th>
                     <th></th>
                 </tr>
@@ -28,6 +29,7 @@
                 <tr ng-repeat="gW_SKU_COST in vm.gW_SKU_COSTS track by gW_SKU_COST.id">
                     <td><a ui-sref="gw-sku-cost-detail({id:gW_SKU_COST.id})">{{gW_SKU_COST.id}}</a></td>
                     <td>{{gW_SKU_COST.sku}}</td>
+                    <td>{{gW_SKU_COST.skill}}</td>
                     <td>{{gW_SKU_COST.cost}}</td>
                     <td class="text-right">
                         <div class="btn-group flex-btn-group-container">

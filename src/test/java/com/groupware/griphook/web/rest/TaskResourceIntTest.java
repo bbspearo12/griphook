@@ -45,8 +45,8 @@ public class TaskResourceIntTest {
     private static final Float DEFAULT_ESTIMATED_HOURS = 1F;
     private static final Float UPDATED_ESTIMATED_HOURS = 2F;
 
-    private static final GW_SKU DEFAULT_RESOURCE = GW_SKU.GW_PS_NET_ENG3_SR_ARCHITECT;
-    private static final GW_SKU UPDATED_RESOURCE = GW_SKU.GW_PS_NET_ENG2_ARCHITECT;
+    private static final GW_SKU DEFAULT_RESOURCE = GW_SKU.GW_PS_VIRT;
+    private static final GW_SKU UPDATED_RESOURCE = GW_SKU.GW_PS_SYSTEMS;
 
     private static final Float DEFAULT_COST = 1F;
     private static final Float UPDATED_COST = 2F;

@@ -14,7 +14,7 @@ describe('Controller Tests', function() {
             MockPreviousState = jasmine.createSpy('MockPreviousState');
             MockTask = jasmine.createSpy('MockTask');
             MockPhase = jasmine.createSpy('MockPhase');
-
+            
 
             var locals = {
                 '$scope': $scope,

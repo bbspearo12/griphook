@@ -96,6 +96,7 @@
                         entity: function () {
                             return {
                                 sku: null,
+                                skill: null,
                                 cost: null,
                                 id: null
                             };

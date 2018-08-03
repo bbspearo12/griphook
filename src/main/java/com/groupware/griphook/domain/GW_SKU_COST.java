@@ -8,6 +8,8 @@ import java.util.Objects;
 
 import com.groupware.griphook.domain.enumeration.GW_SKU;
 
+import com.groupware.griphook.domain.enumeration.GW_SKILL;
+
 /**
  * A GW_SKU_COST.
  */
@@ -24,6 +26,10 @@ public class GW_SKU_COST implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "sku")
     private GW_SKU sku;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "skill")
+    private GW_SKILL skill;
 
     @Column(name = "jhi_cost")
     private Float cost;
@@ -48,6 +54,19 @@ public class GW_SKU_COST implements Serializable {
 
     public void setSku(GW_SKU sku) {
         this.sku = sku;
+    }
+
+    public GW_SKILL getSkill() {
+        return skill;
+    }
+
+    public GW_SKU_COST skill(GW_SKILL skill) {
+        this.skill = skill;
+        return this;
+    }
+
+    public void setSkill(GW_SKILL skill) {
+        this.skill = skill;
     }
 
     public Float getCost() {
@@ -89,6 +108,7 @@ public class GW_SKU_COST implements Serializable {
         return "GW_SKU_COST{" +
             "id=" + getId() +
             ", sku='" + getSku() + "'" +
+            ", skill='" + getSkill() + "'" +
             ", cost=" + getCost() +
             "}";
     }

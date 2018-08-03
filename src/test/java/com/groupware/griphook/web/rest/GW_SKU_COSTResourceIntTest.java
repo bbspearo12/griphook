@@ -30,6 +30,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.groupware.griphook.domain.enumeration.GW_SKU;
+import com.groupware.griphook.domain.enumeration.GW_SKILL;
 /**
  * Test class for the GW_SKU_COSTResource REST controller.
  *
@@ -39,8 +40,11 @@ import com.groupware.griphook.domain.enumeration.GW_SKU;
 @SpringBootTest(classes = GriphookApp.class)
 public class GW_SKU_COSTResourceIntTest {
 
-    private static final GW_SKU DEFAULT_SKU = GW_SKU.GW_PS_NET_ENG3_SR_ARCHITECT;
-    private static final GW_SKU UPDATED_SKU = GW_SKU.GW_PS_NET_ENG2_ARCHITECT;
+    private static final GW_SKU DEFAULT_SKU = GW_SKU.GW_PS_VIRT;
+    private static final GW_SKU UPDATED_SKU = GW_SKU.GW_PS_SYSTEMS;
+
+    private static final GW_SKILL DEFAULT_SKILL = GW_SKILL.INT1;
+    private static final GW_SKILL UPDATED_SKILL = GW_SKILL.INT2;
 
     private static final Float DEFAULT_COST = 1F;
     private static final Float UPDATED_COST = 2F;
@@ -84,6 +88,7 @@ public class GW_SKU_COSTResourceIntTest {
     public static GW_SKU_COST createEntity(EntityManager em) {
         GW_SKU_COST gW_SKU_COST = new GW_SKU_COST()
             .sku(DEFAULT_SKU)
+            .skill(DEFAULT_SKILL)
             .cost(DEFAULT_COST);
         return gW_SKU_COST;
     }
@@ -109,6 +114,7 @@ public class GW_SKU_COSTResourceIntTest {
         assertThat(gW_SKU_COSTList).hasSize(databaseSizeBeforeCreate + 1);
         GW_SKU_COST testGW_SKU_COST = gW_SKU_COSTList.get(gW_SKU_COSTList.size() - 1);
         assertThat(testGW_SKU_COST.getSku()).isEqualTo(DEFAULT_SKU);
+        assertThat(testGW_SKU_COST.getSkill()).isEqualTo(DEFAULT_SKILL);
         assertThat(testGW_SKU_COST.getCost()).isEqualTo(DEFAULT_COST);
     }
 
@@ -143,6 +149,7 @@ public class GW_SKU_COSTResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(gW_SKU_COST.getId().intValue())))
             .andExpect(jsonPath("$.[*].sku").value(hasItem(DEFAULT_SKU.toString())))
+            .andExpect(jsonPath("$.[*].skill").value(hasItem(DEFAULT_SKILL.toString())))
             .andExpect(jsonPath("$.[*].cost").value(hasItem(DEFAULT_COST.doubleValue())));
     }
 
@@ -158,6 +165,7 @@ public class GW_SKU_COSTResourceIntTest {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(gW_SKU_COST.getId().intValue()))
             .andExpect(jsonPath("$.sku").value(DEFAULT_SKU.toString()))
+            .andExpect(jsonPath("$.skill").value(DEFAULT_SKILL.toString()))
             .andExpect(jsonPath("$.cost").value(DEFAULT_COST.doubleValue()));
     }
 
@@ -182,6 +190,7 @@ public class GW_SKU_COSTResourceIntTest {
         em.detach(updatedGW_SKU_COST);
         updatedGW_SKU_COST
             .sku(UPDATED_SKU)
+            .skill(UPDATED_SKILL)
             .cost(UPDATED_COST);
 
         restGW_SKU_COSTMockMvc.perform(put("/api/gw-sku-costs")
@@ -194,6 +203,7 @@ public class GW_SKU_COSTResourceIntTest {
         assertThat(gW_SKU_COSTList).hasSize(databaseSizeBeforeUpdate);
         GW_SKU_COST testGW_SKU_COST = gW_SKU_COSTList.get(gW_SKU_COSTList.size() - 1);
         assertThat(testGW_SKU_COST.getSku()).isEqualTo(UPDATED_SKU);
+        assertThat(testGW_SKU_COST.getSkill()).isEqualTo(UPDATED_SKILL);
         assertThat(testGW_SKU_COST.getCost()).isEqualTo(UPDATED_COST);
     }
 

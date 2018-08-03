@@ -13,7 +13,7 @@ describe('Controller Tests', function() {
             MockEntity = jasmine.createSpy('MockEntity');
             MockPreviousState = jasmine.createSpy('MockPreviousState');
             MockGW_SKU_COST = jasmine.createSpy('MockGW_SKU_COST');
-
+            
 
             var locals = {
                 '$scope': $scope,
