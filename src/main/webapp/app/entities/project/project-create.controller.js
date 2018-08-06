@@ -5,9 +5,9 @@
         .module('griphookApp')
         .controller('ProjectCreateController', ProjectCreateController);
 
-    ProjectCreateController.$inject = ['$window', '$timeout', '$scope', '$stateParams', 'entity', 'Project', 'Phase', 'Task'];
+    ProjectCreateController.$inject = ['$window', '$timeout', '$scope', '$stateParams', 'entity', 'Project', 'Phase', 'Task', 'GW_SKU_COST'];
 
-    function ProjectCreateController($window, $timeout, $scope, $stateParams, entity, Project, Phase, Task) {
+    function ProjectCreateController($window, $timeout, $scope, $stateParams, entity, Project, Phase, Task, GW_SKU_COST) {
         var vm = this;
 
         vm.project = entity;
@@ -151,30 +151,16 @@
             return resourceCost[resource];
         };
         var resourceCost = {
-            GW_PS_NET_ENG3_SR_ARCHITECT :  185,
-            GW_PS_NET_ENG2_ARCHITECT :  145,
-            GW_PS_NET_ENG1_ENGINEER :  100,
-            GW_PS_STORAGE_ENG3_SR_ARCHITECT :  185,
-            GW_PS_STORAGE_ENG2_ARCHITECT :  145,
-            GW_PS_STORAGE_ENG1_ENGINEER :  100,
-            GW_PS_VIRT_ENG3_SR_ARCHITECT :  185,
-            GW_PS_VIRT_ENG2_ARCHITECT :  145,
-            GW_PS_VIRT_ENG1_ENGINEER :  100,
-            GW_PS_MS_ENG3_SR_ARCHITECT :  185,
-            GW_PS_MS_ENG2_ARCHITECT :  145,
-            GW_PS_MS_ENG1_ENGINEER :  100,
-            GW_PS_SEC_ENG3_SR_ARCHITECT :  185,
-            GW_PS_SEC_ENG2_ARCHITECT :  145,
-            GW_PS_SEC_ENG1_ENGINEER :  100,
-            GW_PS_CLD_ENG3_SR_ARCHITECT :  185,
-            GW_PS_CLD_ENG2_ARCHITECT :  145,
-            GW_PS_CLD_ENG1_ENGINEER :  100,
-            GW_PS_INT_LEVEL3 :  185,
-            GW_PS_INT_LEVEL2 :  100,
-            GW_PS_INT_LEVEL1 :  50,
-            GW_PS_PM_LEVEL2_PROJECT_MANAGER :  185,
-            GW_PS_PM_LEVEL1_PROJECT_MANAGER :  150,
-            GW_PS_PC_PROJECT_COORDINATOR :  100
+            INT1 :  45,
+            INT2 :  100,
+            INT3 :  100,
+            ENG2 :  185,
+            ENG1 :  145,
+            ENG3 :  100,
+            CSLTG :  185,
+            PC :  145,
+            PM1 :  100,
+            PM2 :  185
         };
     }
 })();
