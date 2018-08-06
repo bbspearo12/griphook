@@ -98,6 +98,7 @@
                                 name: null,
                                 estimatedHours: null,
                                 resource: null,
+                                skill: null,
                                 cost: null,
                                 numberOfResources: null,
                                 subTotal: null,

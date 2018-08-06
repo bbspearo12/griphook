@@ -8,6 +8,8 @@ import java.util.Objects;
 
 import com.groupware.griphook.domain.enumeration.GW_SKU;
 
+import com.groupware.griphook.domain.enumeration.GW_SKILL;
+
 /**
  * A Task.
  */
@@ -30,6 +32,10 @@ public class Task implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "jhi_resource")
     private GW_SKU resource;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "skill")
+    private GW_SKILL skill;
 
     @Column(name = "jhi_cost")
     private Float cost;
@@ -89,6 +95,19 @@ public class Task implements Serializable {
 
     public void setResource(GW_SKU resource) {
         this.resource = resource;
+    }
+
+    public GW_SKILL getSkill() {
+        return skill;
+    }
+
+    public Task skill(GW_SKILL skill) {
+        this.skill = skill;
+        return this;
+    }
+
+    public void setSkill(GW_SKILL skill) {
+        this.skill = skill;
     }
 
     public Float getCost() {
@@ -171,6 +190,7 @@ public class Task implements Serializable {
             ", name='" + getName() + "'" +
             ", estimatedHours=" + getEstimatedHours() +
             ", resource='" + getResource() + "'" +
+            ", skill='" + getSkill() + "'" +
             ", cost=" + getCost() +
             ", numberOfResources=" + getNumberOfResources() +
             ", subTotal=" + getSubTotal() +

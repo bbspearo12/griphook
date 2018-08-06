@@ -53,6 +53,21 @@
             </select>
         </div>
         <div class="form-group">
+            <label class="control-label" for="field_skill">Skill</label>
+            <select class="form-control" name="skill" ng-model="vm.task.skill" id="field_skill">
+                <option value="INT1">INT1</option>
+                <option value="INT2">INT2</option>
+                <option value="INT3">INT3</option>
+                <option value="ENG1">ENG1</option>
+                <option value="ENG2">ENG2</option>
+                <option value="ENG3">ENG3</option>
+                <option value="CSLTG">CSLTG</option>
+                <option value="PC">PC</option>
+                <option value="PM1">PM1</option>
+                <option value="PM2">PM2</option>
+            </select>
+        </div>
+        <div class="form-group">
             <label class="control-label" for="field_cost">Cost</label>
             <input type="number" class="form-control" name="cost" id="field_cost"
                     ng-model="vm.task.cost" ng-change="updateCost(vm.task.cost)"
@@ -92,7 +107,6 @@
                 <option value=""></option>
             </select>
         </div>
-
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">

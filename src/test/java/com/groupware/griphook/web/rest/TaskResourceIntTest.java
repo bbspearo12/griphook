@@ -30,6 +30,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.groupware.griphook.domain.enumeration.GW_SKU;
+import com.groupware.griphook.domain.enumeration.GW_SKILL;
 /**
  * Test class for the TaskResource REST controller.
  *
@@ -47,6 +48,9 @@ public class TaskResourceIntTest {
 
     private static final GW_SKU DEFAULT_RESOURCE = GW_SKU.GW_PS_VIRT;
     private static final GW_SKU UPDATED_RESOURCE = GW_SKU.GW_PS_SYSTEMS;
+
+    private static final GW_SKILL DEFAULT_SKILL = GW_SKILL.INT1;
+    private static final GW_SKILL UPDATED_SKILL = GW_SKILL.INT2;
 
     private static final Float DEFAULT_COST = 1F;
     private static final Float UPDATED_COST = 2F;
@@ -98,6 +102,7 @@ public class TaskResourceIntTest {
             .name(DEFAULT_NAME)
             .estimatedHours(DEFAULT_ESTIMATED_HOURS)
             .resource(DEFAULT_RESOURCE)
+            .skill(DEFAULT_SKILL)
             .cost(DEFAULT_COST)
             .numberOfResources(DEFAULT_NUMBER_OF_RESOURCES)
             .subTotal(DEFAULT_SUB_TOTAL);
@@ -127,6 +132,7 @@ public class TaskResourceIntTest {
         assertThat(testTask.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testTask.getEstimatedHours()).isEqualTo(DEFAULT_ESTIMATED_HOURS);
         assertThat(testTask.getResource()).isEqualTo(DEFAULT_RESOURCE);
+        assertThat(testTask.getSkill()).isEqualTo(DEFAULT_SKILL);
         assertThat(testTask.getCost()).isEqualTo(DEFAULT_COST);
         assertThat(testTask.getNumberOfResources()).isEqualTo(DEFAULT_NUMBER_OF_RESOURCES);
         assertThat(testTask.getSubTotal()).isEqualTo(DEFAULT_SUB_TOTAL);
@@ -165,6 +171,7 @@ public class TaskResourceIntTest {
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].estimatedHours").value(hasItem(DEFAULT_ESTIMATED_HOURS.doubleValue())))
             .andExpect(jsonPath("$.[*].resource").value(hasItem(DEFAULT_RESOURCE.toString())))
+            .andExpect(jsonPath("$.[*].skill").value(hasItem(DEFAULT_SKILL.toString())))
             .andExpect(jsonPath("$.[*].cost").value(hasItem(DEFAULT_COST.doubleValue())))
             .andExpect(jsonPath("$.[*].numberOfResources").value(hasItem(DEFAULT_NUMBER_OF_RESOURCES)))
             .andExpect(jsonPath("$.[*].subTotal").value(hasItem(DEFAULT_SUB_TOTAL.doubleValue())));
@@ -184,6 +191,7 @@ public class TaskResourceIntTest {
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.estimatedHours").value(DEFAULT_ESTIMATED_HOURS.doubleValue()))
             .andExpect(jsonPath("$.resource").value(DEFAULT_RESOURCE.toString()))
+            .andExpect(jsonPath("$.skill").value(DEFAULT_SKILL.toString()))
             .andExpect(jsonPath("$.cost").value(DEFAULT_COST.doubleValue()))
             .andExpect(jsonPath("$.numberOfResources").value(DEFAULT_NUMBER_OF_RESOURCES))
             .andExpect(jsonPath("$.subTotal").value(DEFAULT_SUB_TOTAL.doubleValue()));
@@ -212,6 +220,7 @@ public class TaskResourceIntTest {
             .name(UPDATED_NAME)
             .estimatedHours(UPDATED_ESTIMATED_HOURS)
             .resource(UPDATED_RESOURCE)
+            .skill(UPDATED_SKILL)
             .cost(UPDATED_COST)
             .numberOfResources(UPDATED_NUMBER_OF_RESOURCES)
             .subTotal(UPDATED_SUB_TOTAL);
@@ -228,6 +237,7 @@ public class TaskResourceIntTest {
         assertThat(testTask.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testTask.getEstimatedHours()).isEqualTo(UPDATED_ESTIMATED_HOURS);
         assertThat(testTask.getResource()).isEqualTo(UPDATED_RESOURCE);
+        assertThat(testTask.getSkill()).isEqualTo(UPDATED_SKILL);
         assertThat(testTask.getCost()).isEqualTo(UPDATED_COST);
         assertThat(testTask.getNumberOfResources()).isEqualTo(UPDATED_NUMBER_OF_RESOURCES);
         assertThat(testTask.getSubTotal()).isEqualTo(UPDATED_SUB_TOTAL);
