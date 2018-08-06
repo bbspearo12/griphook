@@ -83,10 +83,10 @@
             var pst = 0;
             angular.forEach(tasks, function (task) {
                 pst = pst + task.subTotal;
-                if (task.resource.indexOf('ENG') > 0 ) {
-                    vm.engTotal = vm.engTotal + task.subTotal;
-                } else if (task.resource.indexOf('PM') > 0 ) {
+                if (task.resource.indexOf('PROJMNGMT') > 0 ) {
                     vm.pmTotal = vm.pmTotal + task.subTotal;
+                } else {
+                    vm.engTotal = vm.engTotal + task.subTotal;
                 }
             });
             //console.log("phase pst: "+pst);

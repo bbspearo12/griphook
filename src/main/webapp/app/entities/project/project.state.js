@@ -82,8 +82,8 @@
             },
             onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                 $uibModal.open({
-                    templateUrl: 'app/entities/project/project-dialog.html',
-                    controller: 'ProjectDialogController',
+                    templateUrl: 'app/entities/project/project-create.html',
+                    controller: 'ProjectCreateController',
                     controllerAs: 'vm',
                     backdrop: 'static',
                     size: 'lg',

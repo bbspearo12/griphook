@@ -209,14 +209,15 @@ public class ProjectResource {
             filename);
         response.setHeader(headerKey, headerValue);
         JSONArray ja = new JSONArray();
-
+        Float projectMargin = project.getDefaultProjectMargin();
+        Float projectRisk = project.getRisk();
         Iterator<Phase> phases = project.getPhases().iterator();
         TOTALS totals = new TOTALS();
         int i=0;
         while (phases.hasNext()) {
             Phase p = phases.next();
             try {
-                JSONObject formattedjo = getCSVFormattedPhaseJSONObject(p);
+                JSONObject formattedjo = getCSVFormattedPhaseJSONObject(p, projectMargin);
                 ja.put(i, formattedjo);
                 i++;
                 for (Task t: p.getTasks()) {
@@ -243,12 +244,12 @@ public class ProjectResource {
         ja.put(i, psheaderjo);
         i++;
 
-        JSONObject psjo = getCSVFormattedPSTotals(totals.PS_TOTAL);
+        JSONObject psjo = getCSVFormattedPSTotals(totals.PS_TOTAL, projectRisk, projectMargin);
         ja.put(i, psjo);
         i++;
 
         // Add PM Totals
-        JSONObject pmjo = getCSVFormattedPMTotals(totals.PM_TOTAL);
+        JSONObject pmjo = getCSVFormattedPMTotals(totals.PM_TOTAL, projectRisk, projectMargin);
         ja.put(i, pmjo);
         i++;
 
@@ -274,29 +275,29 @@ public class ProjectResource {
         return jo;
     }
 
-    private static JSONObject getCSVFormattedPSTotals(Float PS_Total) throws JSONException {
+    private static JSONObject getCSVFormattedPSTotals(Float PS_Total, Float risk, Float margin) throws JSONException {
         LinkedHashMap<String, String> lhm = new LinkedHashMap<String, String>();
         lhm.put("Phase", "GW_PS");
         lhm.put("Tasks", "$"+String.valueOf(PS_Total));
-        lhm.put("Estimated Hours", "40%");
-        Float st = PS_Total + PS_Total *40/100;
+        lhm.put("Estimated Hours", margin+"%");
+        Float st = PS_Total + PS_Total *margin/100;
         lhm.put("Resource Skill Level", String.valueOf(st));
-        lhm.put("COST (Auto populated)", "3%");
-        st = st + st*3/100;
+        lhm.put("COST (Auto populated)", risk+"%");
+        st = st + st*risk/100;
         lhm.put("Number of Resources", String.valueOf(st));
         JSONObject  jo = new JSONObject(lhm);
         return jo;
     }
 
-    private static JSONObject getCSVFormattedPMTotals(Float PM_TOTAL) throws JSONException {
+    private static JSONObject getCSVFormattedPMTotals(Float PM_TOTAL, Float risk, Float margin) throws JSONException {
         LinkedHashMap<String, String> lhm = new LinkedHashMap<String, String>();
         lhm.put("Phase", "PM");
         lhm.put("Tasks", "$"+String.valueOf(PM_TOTAL));
-        lhm.put("Estimated Hours", "40%");
-        Float st = PM_TOTAL + PM_TOTAL *40/100;
+        lhm.put("Estimated Hours", margin+"%");
+        Float st = PM_TOTAL + PM_TOTAL *margin/100;
         lhm.put("Resource Skill Level", String.valueOf(st));
-        lhm.put("COST (Auto populated)", "3%");
-        st = st + st*3/100;
+        lhm.put("COST (Auto populated)", risk+"%");
+        st = st + st*risk/100;
         lhm.put("Number of Resources", String.valueOf(st));
         JSONObject  jo = new JSONObject(lhm);
         return jo;
@@ -311,7 +312,7 @@ public class ProjectResource {
      * Service Vendor	Vendor Primary Contact	Vendor Contact Number	Vendor Email
      * @throws JSONException
      */
-    private static JSONObject getCSVFormattedPhaseJSONObject(Phase p) throws JSONException {
+    private static JSONObject getCSVFormattedPhaseJSONObject(Phase p, Float margin) throws JSONException {
         LinkedHashMap<String, String> lhm = new LinkedHashMap<String, String>();
 
         lhm.put("Phase", p.getName());
@@ -321,7 +322,7 @@ public class ProjectResource {
         lhm.put("COST (Auto populated)", "");
         lhm.put("Number of Resources", "");
         lhm.put("Task Subtotal (COST)","$"+getPhaseSubTotal(p));
-        lhm.put("Task Total (w/Margin)", "$"+getPhaseSubTotalWithMargin(p));
+        lhm.put("Task Total (w/Margin)", "$"+getPhaseSubTotalWithMargin(p, margin));
 
         JSONObject  jo = new JSONObject(lhm);
         return jo;
@@ -357,12 +358,12 @@ public class ProjectResource {
         return String.valueOf(st);
     }
 
-    public static String getPhaseSubTotalWithMargin(Phase p) {
+    public static String getPhaseSubTotalWithMargin(Phase p, Float margin) {
         Float st = 0.0f;
         for (Task t : p.getTasks()) {
             st += t.getSubTotal();
         }
-        st += st * 40/100;
+        st += st * margin/100;
         return String.valueOf(st);
     }
 
@@ -377,7 +378,7 @@ public class ProjectResource {
         lhm.put("Task Subtotal (COST)","");
         lhm.put("Task Total (w/Margin)", "");
 
-        if (t.getResource() != null &&  t.getResource().toString().contains("PM")) {
+        if (t.getResource() != null &&  t.getResource().toString().contains("PROJMNGMT")) {
             totals.PM_TOTAL += t.getCost()*t.getEstimatedHours();
         }  else  /*(t.getResource() != null &&  t.getResource().toString().contains("PS")) */ {
             totals.PS_TOTAL += t.getCost()*t.getEstimatedHours();
