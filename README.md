@@ -1,6 +1,7 @@
-# griphook
+# Griphook
 Griphook is a costing and project management portal. It can manage costing for different projects, their phases, 
 and subtasks with appropriate information. It can also generate ondemand reports.
+
 ## Development
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
@@ -69,28 +70,6 @@ Performance tests are run by [Gatling][] and written in Scala. They're located i
 
 For more information, refer to the [Running tests page][].
 
-## Using Docker to simplify development (optional)
-
-You can use Docker to improve your JHipster development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
-
-For example, to start a mysql database in a docker container, run:
-
-    docker-compose -f src/main/docker/mysql.yml up -d
-
-To stop it and remove the container, run:
-
-    docker-compose -f src/main/docker/mysql.yml down
-
-You can also fully dockerize your application and all the services that it depends on.
-To achieve this, first build a docker image of your app by running:
-
-    ./mvnw verify -Pprod dockerfile:build
-
-Then run:
-
-    docker-compose -f src/main/docker/app.yml up -d
-
-For more information refer to [Using Docker and Docker-Compose][], this page also contains information on the docker-compose sub-generator (`jhipster docker-compose`), which is able to generate docker configurations for one or several JHipster applications.
 
 ## Continuous Integration (optional)
 
@@ -116,3 +95,28 @@ To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`)
 [Protractor]: https://angular.github.io/protractor/
 [Leaflet]: http://leafletjs.com/
 [DefinitelyTyped]: http://definitelytyped.org/
+
+## Deployment to aws
+
+### Pre-requisites
+
+* Ensure jhipster is [installed](https://www.jhipster.tech/installation/) on your machine 
+
+## Steps
+
+* Update application-prod.yml file with username and password from secrets [store](https://us-west-1.console.aws.amazon.com/secretsmanager/home?region=us-west-1#/listSecrets)
+ 
+* Clone this repo
+
+* Run `jhipster aws`
+
+* Monitor updates in aws console
+
+* If this is 1st time deploying the following roles and instance profiles have to be created
+
+```
+aws iam create-role --role-name griphook-EC2-Instance-Profile --assume-role-policy-document file://griphook-deployer-role.json
+aws iam put-role-policy --role-name griphook-EC2-Instance-Profile --policy-name  griphook-EC2-permissions --policy-document file://griphook-deployer-role.json
+aws iam create-instance-profile --instance-profile-name aws-elasticbeanstalk-ec2-role
+aws iam add-role-to-instance-profile --instance-profile-name aws-elasticbeanstalk-ec2-role --role-name griphook-EC2-Instance-Profile
+```

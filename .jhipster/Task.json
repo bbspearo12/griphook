@@ -23,6 +23,11 @@
             "fieldValues": "GW_PS_VIRT,GW_PS_SYSTEMS,GW_PS_STORAGE,GW_PS_SEC,GW_PS_PROJMNGMT,GW_PS_PC,GW_PS_NETWORK,GW_PS_MS,GW_PS_MOBILITY,GW_PS_INT_FLD,GW_PS_COLLAB,GW_PS_CLOUD,GW_PS_APPS,GW_PS_AI,GW_CONSULTING_VIRT,GW_CONSULTING_STORAGE,GW_CONSULTING_SEC,GW_CONSULTING_NET,GW_CONSULTING_MS,GW_CONSULTING_COLLAB,GW_CONSULTING_CLD,GW_CONSULTING_AI"
         },
         {
+            "fieldName": "skill",
+            "fieldType": "GW_SKILL",
+            "fieldValues": "INT1,INT2,INT3,ENG1,ENG2,ENG3,CSLTG,PC,PM1,PM2"
+        },
+        {
             "fieldName": "cost",
             "fieldType": "Float"
         },

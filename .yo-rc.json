@@ -33,11 +33,11 @@
     "enableHibernateCache": false,
     "aws": {
       "applicationName": "griphook",
-      "environmentName": "griphook-qa",
-      "bucketName": "griphookqa",
+      "environmentName": "griphook-prod-1",
+      "bucketName": "griphook",
       "instanceType": "t2.micro",
-      "awsRegion": "eu-west-1",
-      "dbName": "griphook",
+      "awsRegion": "us-west-1",
+      "dbName": "griphookprod",
       "dbInstanceClass": "db.t2.micro"
     }
   }
